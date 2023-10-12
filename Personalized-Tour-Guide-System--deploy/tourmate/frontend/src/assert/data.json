@@ -1,0 +1,307 @@
+{
+    "html_attributions": [],
+    "results": [
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.032894799999999, "lng": 80.2167912 },
+          "viewport": {
+            "northeast": { "lat": 6.034241330291501, "lng": 80.2181698802915 },
+            "southwest": { "lat": 6.031543369708497, "lng": 80.21547191970848 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Galle, Sri Lanka",
+        "place_id": "ChIJ4SOCGr9z4ToRn8rqQtiqdtw",
+        "reference": "ChIJ4SOCGr9z4ToRn8rqQtiqdtw",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "vicinity": "26M8+5P3, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.032894799999999, "lng": 80.2167912 },
+          "viewport": {
+            "northeast": { "lat": 6.034241330291501, "lng": 80.2181698802915 },
+            "southwest": { "lat": 6.031543369708497, "lng": 80.21547191970848 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "rumassala",
+        "place_id": "ChIJC0cX3-dz4ToR2YQwNB6-ra0",
+        "reference": "ChIJC0cX3-dz4ToR2YQwNB6-ra0",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "vicinity": "26M8+5P3, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.0325017, "lng": 80.2172719 },
+          "viewport": {
+            "northeast": { "lat": 6.033892330291502, "lng": 80.21864958029151 },
+            "southwest": { "lat": 6.031194369708498, "lng": 80.2159516197085 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "City Centre",
+        "place_id": "ChIJESK2Iqpz4ToRQ32Cg6Y5y5E",
+        "reference": "ChIJESK2Iqpz4ToRQ32Cg6Y5y5E",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "vicinity": "26J8+XWJ, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.032037099999999, "lng": 80.218719 },
+          "viewport": {
+            "northeast": { "lat": 6.0338058802915, "lng": 80.2194823302915 },
+            "southwest": { "lat": 6.031107919708496, "lng": 80.21678436970849 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Galle Sea View",
+        "opening_hours": { "open_now": true },
+        "photos": [
+          {
+            "height": 4096,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/107382635761650602335\">Amila Nuwan</a>"
+            ],
+            "photo_reference": "AUacShg15OCkzKnVGMFX4sc7zpFqdTl7svY5GKpexwHGkHXgJbjlGYyD0wPrJqJASkh-Ogw0c9Yyv9E4chSKEfr14nHqgpOEMGhzCOw9075ZH7zPC7u2LdsTjLGiiGCr1cMOWe1oZnSinpl8Y8JIi8qpRgo92DXyOXRKmDi3J3NQfYgxpxbw",
+            "width": 3072
+          }
+        ],
+        "place_id": "ChIJj1YZxfpz4ToRLLFe8mmF2F0",
+        "plus_code": {
+          "compound_code": "26J9+RF Galle, Sri Lanka",
+          "global_code": "6MR226J9+RF"
+        },
+        "rating": 4.6,
+        "reference": "ChIJj1YZxfpz4ToRLLFe8mmF2F0",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "user_ratings_total": 11,
+        "vicinity": "City Park / සිටි පාක්, Marine Walk, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.030459199999999, "lng": 80.2150207 },
+          "viewport": {
+            "northeast": { "lat": 6.031808180291501, "lng": 80.2163696802915 },
+            "southwest": { "lat": 6.029110219708496, "lng": 80.21367171970849 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#7B9EB0",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Galle Dutch Fort",
+        "photos": [
+          {
+            "height": 3844,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/101408898515690607722\">y t</a>"
+            ],
+            "photo_reference": "AUacShhO8rUyJeUj8MG850e6f_Q6ijUpqUnRaoPD-Ix3UJMMqZwuj7BU55xd0BKNCUUr4WS6JfY7tR1xJqIs2t_uxXhy9Z97TJcy1E1e42F_t5LxjOk_2jn--RN6KLH9ngBpJ0BNtAYUHu7XUfT1ndBJ24S6ozssL4GC7YITqQkEuYTiSrGk",
+            "width": 7808
+          }
+        ],
+        "place_id": "ChIJXQLueKNz4ToR_sMWrhaKb7k",
+        "plus_code": {
+          "compound_code": "26J8+52 Galle, Sri Lanka",
+          "global_code": "6MR226J8+52"
+        },
+        "rating": 4.7,
+        "reference": "ChIJXQLueKNz4ToR_sMWrhaKb7k",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "user_ratings_total": 13963,
+        "vicinity": "Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.0339424, "lng": 80.21968989999999 },
+          "viewport": {
+            "northeast": { "lat": 6.035291380291502, "lng": 80.2210388802915 },
+            "southwest": { "lat": 6.032593419708498, "lng": 80.2183409197085 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Galle Bay",
+        "photos": [
+          {
+            "height": 3024,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/112007186653834856006\">CREDO MAPS</a>"
+            ],
+            "photo_reference": "AUacShj9yJy2gRsVIP9Q3w8Nl4N6VZefMbGFcRfi5vBbFweU85bFs8WHZJbpM2Rr73lLjUSEVqdfxE3hGOmQd2BLOfWUQEyKeenetQVgCm7vGkPQoiYGca4BzCqp7msgMWXYOs7r5DOUegbdw19jL57Gq2flxgERoix-pTSK90cvmHqNOKVr",
+            "width": 4032
+          }
+        ],
+        "place_id": "ChIJty1st_Zz4ToRc5tkzHp0_QM",
+        "rating": 4,
+        "reference": "ChIJty1st_Zz4ToRc5tkzHp0_QM",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "user_ratings_total": 2,
+        "vicinity": "26M9+HVG, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.0301207, "lng": 80.215096 },
+          "viewport": {
+            "northeast": { "lat": 6.031469680291502, "lng": 80.21644498029151 },
+            "southwest": { "lat": 6.028771719708497, "lng": 80.2137470197085 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Sleepless Galle",
+        "photos": [
+          {
+            "height": 3072,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/115646412026242134074\">Yohan Dulip Silva</a>"
+            ],
+            "photo_reference": "AUacShgoATHyJg1Qkc7xM55U0GIBmxwPpdJnb6z6cRmYjKlJGNpbDVh5A0XVIwq4pz6p0wM_HuVs8xdosmjtkBamluNTzIM2liQHyKiK6_BUUDxX2cHhiS3PG_fdU-ji6rs0-f3orTXUqs5zWhpfpMn9wd-xnzcNcyJQrWm2Ql0NO-yhGYAp",
+            "width": 4096
+          }
+        ],
+        "place_id": "ChIJ5fEZ4kdz4ToRvlDlQxTKsIM",
+        "rating": 5,
+        "reference": "ChIJ5fEZ4kdz4ToRvlDlQxTKsIM",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "user_ratings_total": 1,
+        "vicinity": "26J8+22X, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.030027699999999, "lng": 80.21512179999999 },
+          "viewport": {
+            "northeast": { "lat": 6.031365780291502, "lng": 80.21647193029149 },
+            "southwest": { "lat": 6.028667819708497, "lng": 80.21377396970848 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Galle Fort Clock Tower",
+        "opening_hours": { "open_now": true },
+        "photos": [
+          {
+            "height": 3693,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/107811773665545355318\">Sithija Senanayaka</a>"
+            ],
+            "photo_reference": "AUacShgXe8zz_N3vzufApOQl2HfBcLxMGmD1olINEaKKN_yhb4v8bb4SwAeM5C-PcWSt7qXVzHXHciUv1jAVruh7ThX-TiX4yaYaSGQP0YrNpSkMiOYpddMSH-L4HuD5vGXv7n3IjXWBLJMs8SEUmCBSbs5tSX_VuahE0FY7x0wsYqfVM_cm",
+            "width": 2770
+          }
+        ],
+        "place_id": "ChIJpWojf6Nz4ToRDnCORP2x9Fo",
+        "plus_code": {
+          "compound_code": "26J8+22 Galle, Sri Lanka",
+          "global_code": "6MR226J8+22"
+        },
+        "rating": 4.6,
+        "reference": "ChIJpWojf6Nz4ToRDnCORP2x9Fo",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "user_ratings_total": 2838,
+        "vicinity": "Galle Fort Clock Tower, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.029019700000001, "lng": 80.21611659999999 },
+          "viewport": {
+            "northeast": { "lat": 6.030372280291503, "lng": 80.21752378029151 },
+            "southwest": { "lat": 6.027674319708498, "lng": 80.2148258197085 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_general-71.png",
+        "icon_background_color": "#7B9EB0",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_christian_pinlet",
+        "name": "St Joseph's Chapel",
+        "opening_hours": { "open_now": true },
+        "photos": [
+          {
+            "height": 2250,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/115892484532902943183\">Maheepa Ariyarathna</a>"
+            ],
+            "photo_reference": "AUacShjDz0DUAAXZ563SjMs06hISTcahyE-7K4JJMMmdHFSTRevaX5b3_wcTR-f3GsbnDWXq_6KQ0YW7KMYYhWtuMBs2KWM-c3HGL1dYty7w9a6uQGyc5h5knRXfmogOINnr7Mw_UNXA1mQllIUdCiUsKvdAZ1uROKgtovNG5AP6JSGLYkSz",
+            "width": 4000
+          }
+        ],
+        "place_id": "ChIJo7y2b6Rz4ToRT5H8Kdq5ld4",
+        "plus_code": {
+          "compound_code": "26H8+JC Galle, Sri Lanka",
+          "global_code": "6MR226H8+JC"
+        },
+        "rating": 4.6,
+        "reference": "ChIJo7y2b6Rz4ToRT5H8Kdq5ld4",
+        "scope": "GOOGLE",
+        "types": [
+          "tourist_attraction",
+          "church",
+          "place_of_worship",
+          "point_of_interest",
+          "establishment"
+        ],
+        "user_ratings_total": 26,
+        "vicinity": "48 Lighthouse Street, Galle"
+      },
+      {
+        "business_status": "OPERATIONAL",
+        "geometry": {
+          "location": { "lat": 6.030230899999999, "lng": 80.21355729999999 },
+          "viewport": {
+            "northeast": { "lat": 6.031579880291502, "lng": 80.2149062802915 },
+            "southwest": { "lat": 6.028881919708497, "lng": 80.2122083197085 }
+          }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "icon_background_color": "#13B5C7",
+        "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+        "name": "Sunset Observing Place",
+        "opening_hours": { "open_now": true },
+        "photos": [
+          {
+            "height": 6936,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/100998395994605951081\">Usman Gul</a>"
+            ],
+            "photo_reference": "AUacShjy77GWa3qVKv5XR2994xIanjeTwMw6VrAkTc7QthNqhyjuK8GIZyhT9Kt9OTPtKfWd069wR1M_XNWr-7DS7Al-d5nKkLW6KseHipnv3GgzuqVSWNxsihRZeoJH8ubJLrfxvUPjyskWLP--nPhP6UsBQqAhC0aa-KFabLdYnHvBxP2U",
+            "width": 9248
+          }
+        ],
+        "place_id": "ChIJV_U97qVz4ToRaahawFgGD2c",
+        "rating": 4.9,
+        "reference": "ChIJV_U97qVz4ToRaahawFgGD2c",
+        "scope": "GOOGLE",
+        "types": ["tourist_attraction", "point_of_interest", "establishment"],
+        "user_ratings_total": 12,
+        "vicinity": "26J7+3CV, Samanala Bridge, Galle"
+      }
+    ],
+    "status": "OK"
+  }
+  
