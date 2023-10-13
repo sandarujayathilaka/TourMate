@@ -114,7 +114,15 @@ function DisplayFavPlace() {
   return (
     <div className="pb-10">
       <div className="relative">
-        <img src={slide} className="w-full h-96 object-cover custom-image" />
+        <img
+          src={slide}
+          className="w-full h-96 object-cover custom-image"
+          style={{
+            borderBottomLeftRadius: "90px",
+
+            borderBottomRightRadius: "90px",
+          }}
+        />
         <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black text-6xl text-center font-bold bg-opacity-50 px-4 py-2 ">
           Favourite Places with Your Favourite Memories
         </p>

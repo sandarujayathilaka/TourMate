@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import logo from "../../assert/logo.png";
+import logo from "../../assert/flowlogo.png";
 import hiddenlogo from "../../assert/hiddensearch.png";
 import favlogo from "../../assert/mapfav.png";
 import hotel from "../../assert/hotel.png";
@@ -108,16 +108,21 @@ function Analytics() {
     doc.setTextColor("#000000");
 
     // Add title and date
-    doc.setFontSize(24);
+    doc.setFontSize(20);
     doc.text(title, 20, 30);
     doc.setFontSize(12);
     doc.setTextColor("#999999");
     doc.text(`Generated on ${date}`, 20, 40);
 
-    doc.setFontSize(16);
+    doc.setFontSize(10);
     doc.setTextColor("#121212");
     doc.text(40, 140, "Start Date :  ");
     doc.text(90, 140, startDate);
+
+      doc.setFontSize(10);
+      doc.setTextColor("#121212");
+      doc.text(40, 150, "End Date :  ");
+      doc.text(90, 150, endDate);
 
     doc.addImage(logo, "JPG", 20, 60, 40, 40);
     doc.setFontSize(16);
@@ -131,7 +136,7 @@ function Analytics() {
     doc.text("Email: tourmatereport@tourmate.com", 70, 90);
 
     doc.autoTable({
-      startY: 150,
+      startY: 160,
       head: [["Place", "Location", "Category", "Place Type", "Visited Date"]],
       body: Places.map((place) => [
         place.placeName,

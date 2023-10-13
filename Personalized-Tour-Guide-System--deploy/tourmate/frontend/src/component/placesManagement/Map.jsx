@@ -335,154 +335,159 @@ function Map() {
 
   console.log(nearestDistance);
   return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyACdwaw1h6cATe6laoMWoayEniMemjgVkE"
-      libraries={libraries}
-    >
-      <div className="flex">
-        {/* Left Side: Information about Nearest Place */}
-        <div className="w-1/4 p-4 bg-white shadow">
-          {/* Display information about the nearest place when available */}
-          {nearestPlace && (
-            <div>
-              <h2 className="text-3xl font-bold mb-5">Nearest Hidden Place</h2>
-              <img
-                src={nearestPlace.image}
-                alt={nearestPlace.placeName}
-                className="w-full h-40 object-cover mb-5 rounded-lg"
-              />
+    <div>
+      <LoadScript
+        googleMapsApiKey="AIzaSyACdwaw1h6cATe6laoMWoayEniMemjgVkE"
+        libraries={libraries}
+      >
+        <div className="flex">
+          {/* Left Side: Information about Nearest Place */}
+          <div className="w-1/4 p-4 bg-white shadow">
+            {/* Display information about the nearest place when available */}
+            {nearestPlace && (
+              <div>
+                <h2 className="text-3xl font-bold mb-5">
+                  Nearest Hidden Place
+                </h2>
+                <img
+                  src={nearestPlace.image}
+                  alt={nearestPlace.placeName}
+                  className="w-full h-40 object-cover mb-5 rounded-lg"
+                />
 
-              <p className="text-2xl font-bold text-blue-950">
-                {nearestPlace.placeName}
-                {weatherNear && (
-                  <span className="ml-3">
-                    {parseFloat(weatherNear.main.temp) > 30 ? (
-                      <span>
-                        <span className="text-xl ml-32 relative font-bold text-orange-500">
-                          {weatherNear.main.temp}°C
+                <p className="text-2xl font-bold text-blue-950">
+                  {nearestPlace.placeName}
+                  {weatherNear && (
+                    <span className="ml-3">
+                      {parseFloat(weatherNear.main.temp) > 30 ? (
+                        <span>
+                          <span className="text-xl ml-32 relative font-bold text-orange-500">
+                            {weatherNear.main.temp}°C
+                          </span>
+                          <br />
                         </span>
-                        <br />
-                      </span>
-                    ) : parseFloat(weatherNear.main.temp) >= 25 &&
-                      parseFloat(weatherNear.main.temp) <= 29 ? (
-                      <span>
-                        <span className="text-xl font-bold ml-32 relative text-green-500">
-                          {weatherNear.main.temp}°C
+                      ) : parseFloat(weatherNear.main.temp) >= 25 &&
+                        parseFloat(weatherNear.main.temp) <= 29 ? (
+                        <span>
+                          <span className="text-xl font-bold ml-32 relative text-green-500">
+                            {weatherNear.main.temp}°C
+                          </span>
+                          <br />
                         </span>
-                        <br />
-                      </span>
-                    ) : (
-                      <span>
-                        <span className="text-xl ml-32 relative font-bold text-sky-700">
-                          {weatherNear.main.temp}°C
+                      ) : (
+                        <span>
+                          <span className="text-xl ml-32 relative font-bold text-sky-700">
+                            {weatherNear.main.temp}°C
+                          </span>
+                          <br />
                         </span>
-                        <br />
+                      )}
+                      <span className="text-xl ml-64 font-bold text-sky-700">
+                        {weatherNear.weather[0].description}
                       </span>
-                    )}
-                    <span className="text-xl ml-64 font-bold text-sky-700">
-                      {weatherNear.weather[0].description}
                     </span>
-                  </span>
+                  )}
+                </p>
+
+                {/* Display current weather information for the nearest place */}
+
+                {/* Display distance from user's current location */}
+                {nearestDistance !== null && (
+                  <div className="mt-5">
+                    <hr></hr>
+                    <img
+                      src={map}
+                      alt="map logo"
+                      className="w-5%  object-cover"
+                    />
+                    <h3 className="mt-4 text-2xl font-bold mb-3"></h3>
+                    <p className="text-xl font-bold text-blue-950">
+                      <span className=" text-2xl text-sky-700">
+                        {nearestDistance.toFixed(2)} km
+                      </span>{" "}
+                    </p>
+                  </div>
                 )}
-              </p>
 
-              {/* Display current weather information for the nearest place */}
-
-              {/* Display distance from user's current location */}
-              {nearestDistance !== null && (
                 <div className="mt-5">
                   <hr></hr>
-                  <img
-                    src={map}
-                    alt="map logo"
-                    className="w-5%  object-cover"
-                  />
-                  <h3 className="mt-4 text-2xl font-bold mb-3"></h3>
-                  <p className="text-xl font-bold text-blue-950">
-                    <span className=" text-2xl text-sky-700">
-                      {nearestDistance.toFixed(2)} km
-                    </span>{" "}
+                  <h3 className="mt-4 text-2xl font-bold mb-3">Description</h3>
+                  <p className="text-base  text-blue-950">
+                    <textarea className="w-96 h-40 text-lg" disabled>
+                      {nearestPlace.description}
+                    </textarea>
                   </p>
                 </div>
-              )}
-
-              <div className="mt-5">
-                <hr></hr>
-                <h3 className="mt-4 text-2xl font-bold mb-3">Description</h3>
-                <p className="text-base  text-blue-950">
-                  <textarea className="w-96 h-40 text-lg" disabled>
-                    {nearestPlace.description}
-                  </textarea>
-                </p>
               </div>
-            </div>
-          )}
-        </div>
-
-        <div className="w-3/4">
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={8}
-          >
-            {favoritePlaces.map((place, index) => (
-              <Marker
-                key={index}
-                position={{ lat: place.latitude, lng: place.longitude }}
-                title={place.placeName}
-                onClick={() => setSelectedPlace(place)} // Set selected place when marker is clicked
-              />
-            ))}
-            {selectedPlace && (
-              <InfoWindow
-                position={{
-                  lat: selectedPlace.latitude,
-                  lng: selectedPlace.longitude,
-                }}
-                onCloseClick={() => setSelectedPlace(null)} // Clear selected place when InfoWindow is closed
-              >
-                {/* InfoWindow content */}
-                <div>
-                  {selectedPlace && (
-                    <div>
-                      <button
-                        onClick={() => handleDirectionsClick(selectedPlace)}
-                      >
-                        Get Directions
-                      </button>
-                    </div>
-                  )}
-
-                  <img
-                    src={selectedPlace.image}
-                    alt={selectedPlace.placeName}
-                    className="w-full h-40 object-cover"
-                  />
-                  <h2>{selectedPlace.placeName}</h2>
-                  <p>Visited Date: {selectedPlace.visitedDate}</p>
-
-                  {weather && (
-                    <div>
-                      <h3>Weather Information</h3>
-                      <p className="text-black">
-                        Temperature: {weather.main.temp}°C
-                      </p>
-                      <p>Weather Condition: {weather.weather[0].description}</p>
-                    </div>
-                  )}
-
-                  {distance && duration && (
-                    <div>
-                      <h3>Directions</h3>
-                      <p>Distance: {distance}</p>
-                      <p>Duration: {duration}</p>
-                    </div>
-                  )}
-                </div>
-              </InfoWindow>
             )}
-            {/* Draw the polyline connecting favorite places */}
-            {/* {pathCoordinates.length > 0 && (
+          </div>
+
+          <div className="w-3/4">
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              center={center}
+              zoom={8}
+            >
+              {favoritePlaces.map((place, index) => (
+                <Marker
+                  key={index}
+                  position={{ lat: place.latitude, lng: place.longitude }}
+                  title={place.placeName}
+                  onClick={() => setSelectedPlace(place)} // Set selected place when marker is clicked
+                />
+              ))}
+              {selectedPlace && (
+                <InfoWindow
+                  position={{
+                    lat: selectedPlace.latitude,
+                    lng: selectedPlace.longitude,
+                  }}
+                  onCloseClick={() => setSelectedPlace(null)} // Clear selected place when InfoWindow is closed
+                >
+                  {/* InfoWindow content */}
+                  <div>
+                    {selectedPlace && (
+                      <div>
+                        <button
+                          onClick={() => handleDirectionsClick(selectedPlace)}
+                        >
+                          Get Directions
+                        </button>
+                      </div>
+                    )}
+
+                    <img
+                      src={selectedPlace.image}
+                      alt={selectedPlace.placeName}
+                      className="w-full h-40 object-cover"
+                    />
+                    <h2>{selectedPlace.placeName}</h2>
+                    <p>Visited Date: {selectedPlace.visitedDate}</p>
+
+                    {weather && (
+                      <div>
+                        <h3>Weather Information</h3>
+                        <p className="text-black">
+                          Temperature: {weather.main.temp}°C
+                        </p>
+                        <p>
+                          Weather Condition: {weather.weather[0].description}
+                        </p>
+                      </div>
+                    )}
+
+                    {distance && duration && (
+                      <div>
+                        <h3>Directions</h3>
+                        <p>Distance: {distance}</p>
+                        <p>Duration: {duration}</p>
+                      </div>
+                    )}
+                  </div>
+                </InfoWindow>
+              )}
+              {/* Draw the polyline connecting favorite places */}
+              {/* {pathCoordinates.length > 0 && (
               <Polyline
                 path={pathCoordinates}
                 options={{
@@ -492,37 +497,38 @@ function Map() {
                 }}
               />
             )} */}
-            {/* Display directions on the map */}
-            {directions && (
-              <DirectionsRenderer
-                directions={directions}
-                options={{
-                  polylineOptions: {
-                    strokeColor: "#007bff",
-                  },
-                }}
-              />
-            )}
-            {nearestPlace && (
-              <Marker
-                position={{
-                  lat: nearestPlace.latitude,
-                  lng: nearestPlace.longitude,
-                }}
-                title="Nearest Place"
-                icon={{
-                  path: window.google.maps.SymbolPath.CIRCLE,
-                  fillColor: "#00FF00",
-                  fillOpacity: 0.7,
-                  strokeWeight: 0,
-                  scale: 10,
-                }}
-              />
-            )}
-          </GoogleMap>
+              {/* Display directions on the map */}
+              {directions && (
+                <DirectionsRenderer
+                  directions={directions}
+                  options={{
+                    polylineOptions: {
+                      strokeColor: "#007bff",
+                    },
+                  }}
+                />
+              )}
+              {nearestPlace && (
+                <Marker
+                  position={{
+                    lat: nearestPlace.latitude,
+                    lng: nearestPlace.longitude,
+                  }}
+                  title="Nearest Place"
+                  icon={{
+                    path: window.google.maps.SymbolPath.CIRCLE,
+                    fillColor: "#00FF00",
+                    fillOpacity: 0.7,
+                    strokeWeight: 0,
+                    scale: 10,
+                  }}
+                />
+              )}
+            </GoogleMap>
+          </div>
         </div>
-      </div>
-    </LoadScript>
+      </LoadScript>
+    </div>
   );
 }
 

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import i18nIsoCountries from "i18n-iso-countries";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { Autocomplete } from '@react-google-maps/api';
-import back from "../assert/back.jpeg"
-import slide1 from "../assert/slide1.jpg"
+import back from "../assert/Sigiriya.jpg"
+import tour from "../assert/rec.png"
+import forcast from "../assert/forcast.png";
 import slide2 from "../assert/slide2.jpg"
+import slide1 from "../assert/slide1.jpg";
 import slide3 from "../assert/slide3.jpg"
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams,useNavigate } from "react-router-dom";
@@ -319,7 +321,7 @@ useEffect(() => {
            {/* Box 1 */}
            <div className="w-1/4 p-4">
              <div className="bg-white p-4 rounded-md">
-               <img src="image1.jpg" alt="Image 1" className="w-3/4 mx-auto" />
+               <img src={tour} alt="Image 1" className="w-3/4 mx-auto" />
                <p className="text-center">Personalized recommendations</p>
              </div>
            </div>
@@ -327,7 +329,7 @@ useEffect(() => {
            {/* Box 2 */}
            <div className="w-1/4 p-4">
              <div className="bg-white p-4 rounded-md">
-               <img src="image2.jpg" alt="Image 2" className="w-3/4 mx-auto" />
+               <img src={forcast} alt="Image 2" className="w-3/4 mx-auto" />
                <p className="text-center">6-day weather forecast</p>
              </div>
            </div>

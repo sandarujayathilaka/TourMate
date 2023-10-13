@@ -60,8 +60,8 @@ function AddFavPlace() {
   async function addPlace(event) {
     event.preventDefault();
 
-    if (description.length > 300) {
-      toast.error("Description cannot exceed 200 characters");
+    if (description.length > 500) {
+      toast.error("Description cannot exceed 500 characters");
       return; // Exit the function without adding data
     }
 
