@@ -21,9 +21,8 @@ const api = {
   googlePlacesKey: "AIzaSyACdwaw1h6cATe6laoMWoayEniMemjgVkE", // Replace with your Google Places API key
 };
 
-function Home(props) {
- const { auth } = useAuth();
- const { user } = auth;
+function UnHome(props) {
+//  const { auth } = useAuth();
   const [search, setSearch] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorMessageFav, setErrorMessageFav] = useState("");
@@ -41,7 +40,7 @@ function Home(props) {
   //const indicesToInclude = [3, 11, 19, 27, 35, 39];
   const [chartData, setChartData] = useState({});
   const [experiences, setExperience] = useState([]);
-  const addedLocations = []; 
+  
 
   const backgroundImageStyle = {
     backgroundImage: `url(${logo})`,
@@ -60,64 +59,7 @@ const goToNextImage = () => {
 };
 const currentImage = images[currentImageIndex];
 
-async function addList(place) {
-  const newPlace = {
-    placeName2: place.name,
-    userId: user,
-    placeName: search,
-    description: place.vicinity,
-    lat: place.geometry.location.lat,
-    long: place.geometry.location.lng,
-    note: "",
-  };
 
-  // Check if the location already exists in the addedLocations array
-  const locationExists = addedLocations.some(
-    (existingLocation) =>
-      existingLocation.lat === newPlace.lat &&
-      existingLocation.long === newPlace.long
-  );
-
-  if (locationExists) {
-    const message = "Place with the same location is already added.";
-    alert(message); // Show an alert with the message
-    return message; // Return a message indicating the result.
-  }
-
-  try {
-    const response = await axios.post(
-      "http://localhost:8080/wishlist/create",
-      newPlace,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
-
-    console.log("List added:", response.data);
-
-    // Update the recommendations state to include the new place
-    // setRecommendations((prevRecommendations) => [...prevRecommendations, newPlace]);
-
-    // Add the new location to the addedLocations array
-    addedLocations.push({
-      lat: newPlace.lat,
-      long: newPlace.long,
-    });
-
-    const message = "Place added successfully.";
-    toast.success(message); 
-    return message; 
-  } catch (error) {
-    console.error("Error adding list:", error);
-    const errorMessage = "Error adding place.";
-    toast.error(errorMessage); 
-    return errorMessage;
-  }
-}
 
 
 useEffect(() => {
@@ -434,10 +376,11 @@ const fetchFavoritePlaces=async()=> {
       {!searchPerformed && (
        <div className="bg-cover bg-center bg-no-repeat h-screen relative" style={backgroundImageStyle}>
        <div className="absolute inset-0 flex items-start justify-center mt-20">
-       <div className="text-white text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold w-3/4 max-w-2xl px-4 mb-10">
-           <p className="animate-fade-in">Discover great places with our TourMate website and maintain your records to get wonderful suggestions!</p>
-         </div>
-       </div>
+  <div className="text-white text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold w-3/4 max-w-2xl px-4 mb-10">
+    <p className="animate-fade-in">Discover great places with our TourMate website and maintain your records to get wonderful suggestions!</p>
+  </div>
+</div>
+
        <div className="absolute inset-0 flex justify-center mt-72">
          <div className="flex">
            {/* Box 1 */}
@@ -615,28 +558,7 @@ const fetchFavoritePlaces=async()=> {
                     </div>
                   
                   </div>
-                  <button
-                           onClick={() => addList(place)}
-                            href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                          >
-                            Add to list
-                            <svg
-                              class="w-3.5 h-3.5 ml-2"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 14 10"
-                            >
-                              <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9"
-                              />
-                            </svg>
-                          </button>    
+                   
                 </div>
               ))}
             </div>
@@ -678,28 +600,6 @@ const fetchFavoritePlaces=async()=> {
                   {place.placeName}
                 </h5>
               </div>
-              <button
-                           onClick={() => addList(place)}
-                            href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-5 mb-5"
-                          >
-                            Add to list
-                            <svg
-                              class="w-3.5 h-3.5 ml-2"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 14 10"
-                            >
-                              <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9"
-                              />
-                            </svg>
-                          </button>  
             </div>
           ))
         )}
@@ -708,8 +608,8 @@ const fetchFavoritePlaces=async()=> {
 
         {activeTab === "favorite" && (
          <div>
-
-          {favoritePlaces.length === 0 ?  (
+       
+     {favoritePlaces.length === 0 ?  (
        <p className="text-red-500 text-center">No records found</p>
      ) : (
        <div>
@@ -738,30 +638,7 @@ const fetchFavoritePlaces=async()=> {
                <div className="grid grid-cols-2">
                 
                </div>
-               <button
-                           onClick={() => addList(place)}
-                            href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                          >
-                            Add to list
-                            <svg
-                              class="w-3.5 h-3.5 ml-2"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 14 10"
-                            >
-                              <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9"
-                              />
-                            </svg>
-                          </button>  
              </div>
-             
            ))}
          </div>
        </div>
@@ -772,7 +649,7 @@ const fetchFavoritePlaces=async()=> {
 
         {activeTab === "experience" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-8">
-           {experiences.length === 0 ?  (
+             {experiences.length === 0 ?  (
        <p className="text-red-500 text-center">No records found</p>
      ) : (
       <div className="mb-5">
@@ -798,9 +675,9 @@ const fetchFavoritePlaces=async()=> {
               </div>
             </div>
           ))}
-     </div>
+    </div>
        
-       )}
+    )}
         </div>
         )}
       </div>
@@ -810,4 +687,4 @@ const fetchFavoritePlaces=async()=> {
   );
 }
 
-export default Home;
+export default UnHome;

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { UserCircleIcon, CameraIcon } from "@heroicons/react/outline";
+import useAuth from '../hooks/useAuth';
 
 function CreateExperience() {
+  const { auth } = useAuth();
+  const {user} = auth;
     const [topic, setTopic] = useState("");
-    const [userName, setUserName] = useState("");
+   
     const [location, setLocation] = useState("");
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
@@ -15,28 +18,31 @@ function CreateExperience() {
   
       const newExperience = {
         topic,
-        userName,
+        user,
         location,
         image,
         description
       };
   
       try {
+        const {  accessToken } = auth;
+        
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        };
         const response = await axios.post(
           "http://localhost:8080/exp",
           newExperience,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-          }
+          config
         );
         console.log("Experience Shared:", response.data);
   
           setTopic("");
-          setUserName("");
+         
           setLocation("");
           setImage("");
           setDescription("");
@@ -108,8 +114,8 @@ function CreateExperience() {
                   
                   <input
                     type="text"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
+                    value={user}
+                    disabled
                     name="username"
                     id="username"
                     autoComplete="username"

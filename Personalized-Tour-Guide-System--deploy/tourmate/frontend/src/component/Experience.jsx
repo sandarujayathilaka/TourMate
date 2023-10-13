@@ -21,6 +21,7 @@ import useAuth from '../hooks/useAuth';
 
 export default function Experience() {
   const { auth } = useAuth();
+  const {user} = auth;
   const [experiences, setExperience] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,17 +62,35 @@ export default function Experience() {
 
  
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
 
-    const filteredExperiences = experiences.filter((experience) =>
+    const searchTerm = e.currentTarget.value;
 
-      experience.topic.toLowerCase().includes(searchTerm.toLowerCase())
+    axios.get(`http://localhost:8080/exp`).then((res) => {
+
+      if (res.data) {
+
+        filterContent(res.data, searchTerm);
+
+      }
+
+    });
+
+  };
+
+ 
+
+  function filterContent(place, searchTerm) {
+
+    const result = place.filter((r) =>
+
+      r.location.toLowerCase().includes(searchTerm.toLowerCase())
 
     );
 
-    setExperience(filteredExperiences);
+    setExperience(result);
 
-  };
+  }
 
  
 
@@ -104,191 +123,7 @@ export default function Experience() {
 
  
 
-  const generateReport = () => {
-
-    const filteredExperiences = experiences.filter((experience) =>
-
-      experience.location.toLowerCase() === userLocation.toLowerCase()
-
-    );
-
  
-
-    const title = "Report";
-
-    const doc = new jsPDF();
-
-    const today = new Date();
-
-    const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-
- 
-
-    // Define a margin and padding for content
-
-    const margin = 20;
-
-    const padding = 10;
-
- 
-
-    // Set document font and color
-
-    doc.setFont("helvetica");
-
-    doc.setTextColor("#000000");
-
- 
-
-    // Create a magazine-style layout
-
-    const pageWidth = doc.internal.pageSize.width;
-
-    const pageHeight = doc.internal.pageSize.height;
-
-    const contentWidth = pageWidth - 2 * margin;
-
- 
-
-    // Add a title
-
-    doc.setFontSize(24);
-
-    doc.text(title, margin, margin);
-
- 
-
-    // Add date
-
-    doc.setFontSize(12);
-
-    doc.setTextColor("#999999");
-
-    doc.text(`Generated on ${date}`, margin, margin + 10);
-
- 
-
-    // Add logo and company details
-
-    doc.addImage("path_to_your_image.jpg", "JPEG", margin, margin + 20, 40, 40);
-
-    doc.setFontSize(16);
-
-    doc.setFont("helvetica", "bold");
-
-    doc.setTextColor("#000000");
-
-    doc.text("TourMate", margin + 50, margin + 30);
-
-    doc.setFont("helvetica", "normal");
-
-    doc.setFontSize(10);
-
-    doc.setTextColor("#999999");
-
-    doc.text("Tel: +94 11 234 5678", margin + 50, margin + 40);
-
-    doc.text("Address: No 221/B, Peradeniya Road, Kandy", margin + 50, margin + 50);
-
- 
-
-    // Add a magazine-style content layout
-
-    let currentY = margin + 80;
-
- 
-
-    filteredExperiences.forEach((experience) => {
-
-      // Add the topic
-
-      doc.setFontSize(18);
-
-      doc.setTextColor("#000000");
-
-      doc.text(experience.topic, margin, currentY);
-
- 
-
-      // Add the author
-
-      doc.setFontSize(12);
-
-      doc.setTextColor("#999999");
-
-      doc.text(`Author: ${experience.userName}`, margin, currentY + 10);
-
- 
-
-      // Add the location
-
-      doc.setFontSize(12);
-
-      doc.setTextColor("#999999");
-
-      doc.text(`Location: ${experience.location}`, margin, currentY + 20);
-
- 
-
-      // Add the image
-
-      doc.addImage(experience.image, margin, currentY + 30, 60, 60);
-
- 
-
-      // Add the description
-
-      doc.setFontSize(12);
-
-      doc.setTextColor("#000000");
-
- 
-
-      // Set the font style to italic
-
-      doc.setFont(undefined, 'italic');
-
- 
-
-      const newMargin = margin - 10;
-
-      const descriptionLines = doc.splitTextToSize(experience.description, contentWidth - padding * 2);
-
-      doc.text(descriptionLines, newMargin + padding, currentY + 100);
-
- 
-
-      // Set the font style back to normal (if needed for subsequent text)
-
-      doc.setFont(undefined, 'normal');
-
- 
-
-      currentY += descriptionLines.length * 10;
-
- 
-
-      // Move to the next page if necessary
-
-      if (currentY + 200 > pageHeight - margin) {
-
-        doc.addPage();
-
-        currentY = margin;
-
-      } else {
-
-        currentY += 200;
-
-      }
-
-    });
-
- 
-
-    doc.save("Exp Magazine Report.pdf");
-
-  };
 
  
 
@@ -333,136 +168,31 @@ export default function Experience() {
             }}
 
           />
+<p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white bg-black text-6xl text-center font-bold bg-opacity-50 px-4 py-2 ">
 
+Explore the Unseen, Embrace the Unknown
+
+</p>
           <div className=" absolute top-3 right-3 transform -translate-x-1/2 z-10">
 
-            <div className=" flex p-5">
-
-              <Link
-
-                to="/addExp"
-
-                className=" bg-[rgb(57,195,205)] hover:bg-[#16108d] px-[15px] py-[8px] rounded-[120px] font-bold text-white text-[12px] block w-[100px] text-center mr-2"
-
-              >
-
-                +ADD
-
-              </Link>
-
-            </div>
-
-            <div className=" flex p-5">
-
-              {showEmailPrompt ? ( // Display EmailPrompt if showEmailPrompt is true
-
-                <div></div>
-
-              ) : (
-
-                <button
-
-                  className="bg-[#39c3cd] hover:bg-[#16108d] px-[15px] py-[8px] rounded-[120px] font-bold text-white text-[12px] block w-[120px] text-center ml-2"
-
-                  onClick={() => setShowEmailPrompt(true)}
-
-                >
-
-                  My Experience
-
-                </button>
-
-              )}
-
-            </div>
-
+           
  
 
-            <div className="flex scroll-smooth">
-
-              <input
-
-                type="text"
-
-                placeholder="Enter Location"
-
-                value={userLocation}
-
-                onChange={(e) => setUserLocation(e.target.value)}
-
-              />
-
-              <button
-
-                className="bg-[#39c3cd] hover-bg-[#16108d] px-[15px] py-[8px] rounded-[120px] font-bold text-white text-[12px] block w-[100px] text-center mr-2"
-
-                onClick={generateReport}
-
-              >
-
-                Get Report
-
-              </button>
-
-            </div>
+            
 
           </div>
 
         </div>
+        
 
-        <div className="flex justify-center">
-
-          <div className="flex h-10 w-200 mt-3">
-
-            <input
-
-              type="text"
-
-              className="rounded-3xl py-2.5 px-5 w-[40vh] text-sm text-black-900 bg-[#E4EBF7] border-0 border-b-2 border-gray-300 appearance-non focus:outline-none focus:ring-0 focus:border-[#FF9F00] mr-2"
-
-              placeholder="Search by Location"
-
-              value={searchTerm}
-
-              onChange={(e) => {
-
-                setSearchTerm(e.target.value);
-
-              }}
-
-            />
-
-            <button
-
-              className="bg-[#39c3cd] hover:bg-[#16108d] px-[15px] py-[8px] rounded-[120px] font-bold text-white text-[12px]"
-
-              onClick={handleSearch}
-
-            >
-
-              Search
-
-            </button>
-
-            {searchTerm && (
-
-              <button
-
-                className="bg-[#39c3cd] hover:bg-[#16108d] px-[15px] py-[8px] rounded-[120px] font-bold text-white text-[12px] ml-2"
-
-                onClick={resetSearch}
-
-              >
-
-                Reset
-
-              </button>
-
-            )}
-
-          </div>
-
-        </div>
+        <div class="relative ml-[36%] mt-[-10%] z-30">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+</svg>
+</div>
+<input type="search" onChange={handleSearch} id="default-search" class="block w-1/2 h-16 p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 transform hover:scale-105 transition-transform duration-300 shadow-lg mt-40" placeholder="Search the location" required />
+</div>
 
         <main className="py-6 px-4 sm:p-6 md:py-10 md:px-8">
 
@@ -590,37 +320,7 @@ export default function Experience() {
 
                     </dl>
 
-                    <div className="mt-4">
-
-                      <button
-
-                        className="bg-[#1f1758] hover:bg-[#62d9e0] text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg mr-2"
-
-                        onClick={() => onDelete(experience._id)}
-
-                      >
-
-                        Delete
-
-                      </button>
-
- 
-
- 
-
-                      <Link
-
-                        to={`/updateExp/${experience._id}`}
-
-                        className="bg-[#1f1758] hover:bg-[#62d9e0] text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
-
-                      >
-
-                        Update
-
-                      </Link>
-
-                    </div>
+                   
 
                   </div>
 

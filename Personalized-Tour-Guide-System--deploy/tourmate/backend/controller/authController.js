@@ -13,6 +13,7 @@ const handleLogin = async (req, res) => {
   let roles;
  console.log(user);
  console.log(pwd);
+ try{
   if (!user || !pwd)
     return res
       .status(400)
@@ -77,6 +78,9 @@ const handleLogin = async (req, res) => {
   console.error("An error occurred:", error);
   res.status(500).json({ error: "Internal server error" });
 }
+ }catch(error){
+  console.error("network issue:", error);
+ }
 };
 
 const forget = async (req, res) => {
