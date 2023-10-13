@@ -4,10 +4,10 @@ const asyncHandler = require('express-async-handler');
 const addExperience = asyncHandler(async (req, res) => {
 console.log(req.body);
  try {
-    const { topic, userName, location, image, description} = req.body;
+    const { topic, user, location, image, description} = req.body;
     const experience = new Experience({
       topic,
-      userName,
+      userName:user,
       location,
       image,
       description,
@@ -105,13 +105,30 @@ const deleteExperience = asyncHandler(async (req, res) => {
 
 
 
+const getExperiencesByCurrentUser = asyncHandler(async (req, res) => {
+console.log("getExperiencesByCurrentUser");
+  const currentUserUsername = req.params.user;
+  console.log(currentUserUsername);
+  try {
 
+    const experiences = await Experience.find({ userName: currentUserUsername });
+    if (!experiences || experiences.length === 0) {
+      return res.status(404).json({ message: 'No experiences found for the current user.' });
+    }
+    res.status(200).json(experiences);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+
+});
 module.exports = {
    
     addExperience,
     readExperience,
     updateExperience,
     deleteExperience,
-    getOneExperience
+    getOneExperience,
+    getExperiencesByCurrentUser,
   
   };

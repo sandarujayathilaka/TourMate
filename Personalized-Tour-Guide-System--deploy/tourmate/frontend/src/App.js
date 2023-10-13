@@ -26,6 +26,7 @@ import DisplayFavPlace from "./component/placesManagement/DisplayFavPlace";
 import Experience from "./component/Experience";
 import CreateExperience from "./component/CreateExperience";
 import UpdateExperience from "./component/UpdateExperience";
+import MyExperience from "./component/MyExperience";
 
 import SearchPlaces from "./component/wishlistManagement/SearchPlaces";
 import WishList from "./component/wishlistManagement/WishList";
@@ -41,7 +42,7 @@ function App() {
     <>
     <NavBar />
     <Routes>
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<UnHome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
    
@@ -55,10 +56,10 @@ function App() {
         <Route path="/displayallhidden" element={<DisplayAllHidden />} />
         <Route path="/map" element={<Map />} />
        
-        
+        <Route path="/exp" element={<Experience />} />
      
         <Route element={<PersistLogin />}>
-          
+        <Route path="/:user" element={<Home />} />
         <Route path="myProfile" element={<Profile />} />
                 
                 <Route path="updateUserpass/:user" element={<UpdatePassword />} />
@@ -71,11 +72,11 @@ function App() {
         <Route path="/addfavplace/:user" element={<AddFavPlace />} />
        
 
-       <Route path="/Exp/:user" element={<Experience />} />
+       <Route path="/exp/:user" element={<MyExperience />} />
        <Route path="/addExp/:user" element={<CreateExperience />} />
        <Route path="/updateExp/:id" element={<UpdateExperience />} />
        <Route path="/displayallhidden/:user" element={<DisplayAllHidden />} />
-       <Route path="/:user" element={<Home />} />
+    
        <Route path="/map/:user" element={<Map />} />
                 {/* <Route path="departments" element={<AgDepartment />} />
                 <Route path="allemployee/:id" element={<AllEmployee />} />
