@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import vidBG from "../assert/vid.mp4";
-import data from "../assert/data.json"
-import bg from "../assert/bg.jpg"
+import vidBG from "../../assert/vid.mp4";
+import data from "../../assert/data.json";
+import bg from "../../assert/bg.jpg";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 function Main() {
   const [key, setkey] = useState("AIzaSyACdwaw1h6cATe6laoMWoayEniMemjgVkE");
@@ -12,71 +14,73 @@ function Main() {
   const [displayintro, setdisplayintro] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
   const [dev, setdev] = useState([]);
+   const { auth } = useAuth();
+   const { user } = auth;
+   const userid = user;
 
-  const addedLocations = []; 
+  const addedLocations = [];
 
-async function addList(place) {
-  const newPlace = {
-    placeName2: place.name,
-    userId: "user2",
-    placeName: location,
-    description: place.vicinity,
-    lat: place.geometry.location.lat,
-    long: place.geometry.location.lng,
-    note: "",
-  };
+  async function addList(place) {
+    const newPlace = {
+      placeName2: place.name,
+      userId: userid,
+      placeName: location,
+      description: place.vicinity,
+      lat: place.geometry.location.lat,
+      long: place.geometry.location.lng,
+      note: "",
+    };
 
-  // Check if the location already exists in the addedLocations array
-  const locationExists = addedLocations.some(
-    (existingLocation) =>
-      existingLocation.lat === newPlace.lat &&
-      existingLocation.long === newPlace.long
-  );
-
-  if (locationExists) {
-    const message = "Place with the same location is already added.";
-    alert(message); // Show an alert with the message
-    return message; // Return a message indicating the result.
-  }
-
-  try {
-    const response = await axios.post(
-      "http://localhost:8080/wishlist/create",
-      newPlace,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
+    // Check if the location already exists in the addedLocations array
+    const locationExists = addedLocations.some(
+      (existingLocation) =>
+        existingLocation.lat === newPlace.lat &&
+        existingLocation.long === newPlace.long
     );
 
-    console.log("List added:", response.data);
+    if (locationExists) {
+      const message = "Place with the same location is already added.";
+      // toast.error(message, {
+      //   position: toast.POSITION.TOP_RIGHT,
+      // });
+      alert(message); // Show an alert with the message
+      return message; // Return a message indicating the result.
+    }
 
-    // Update the recommendations state to include the new place
-    // setRecommendations((prevRecommendations) => [...prevRecommendations, newPlace]);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/wishlist/create",
+        newPlace,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
 
-    // Add the new location to the addedLocations array
-    addedLocations.push({
-      lat: newPlace.lat,
-      long: newPlace.long,
-    });
+      console.log("List added:", response.data);
 
-    const message = "Place added successfully.";
-    alert(message); 
-    return message; 
-  } catch (error) {
-    console.error("Error adding list:", error);
-    const errorMessage = "Error adding place.";
-    alert(errorMessage); 
-    return errorMessage;
+      // Update the recommendations state to include the new place
+      // setRecommendations((prevRecommendations) => [...prevRecommendations, newPlace]);
+
+      // Add the new location to the addedLocations array
+      addedLocations.push({
+        lat: newPlace.lat,
+        long: newPlace.long,
+      });
+
+      const message = "Place added successfully.";
+      alert(message);
+      return message;
+    } catch (error) {
+      console.error("Error adding list:", error);
+      const errorMessage = "Error adding place.";
+      alert(errorMessage);
+      return errorMessage;
+    }
   }
-}
-
-
-  
-  
 
   const rundev = () => {
     setdev(data);
@@ -130,9 +134,6 @@ async function addList(place) {
       const apiUrl = "http://localhost:8080/places/fetchPlaces";
       const coordinates = { latitude: lat, longitude: lng };
 
-
-
-
       const postResponse = await fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -140,7 +141,6 @@ async function addList(place) {
         },
         body: JSON.stringify({ coordinates }),
       });
-
 
       if (!postResponse.ok) {
         throw new Error("Failed to send POST request");
@@ -150,11 +150,10 @@ async function addList(place) {
 
       // Handle the response data as needed
       // console.log(responseData);
-      //get req 
-      //pass the location 
+      //get req
+      //pass the location
       //const responseData2 = await postResponse.json();
 
-      
       setRecommendations(responseData);
     } catch (error) {}
   };
@@ -167,19 +166,15 @@ async function addList(place) {
   return (
     <div>
       <div className="main">
-      <div className="overlay bg-cover" style={{backgroundImage: `url(${bg})`}}>
+        <div
+          className="overlay bg-cover"
+          style={{ backgroundImage: `url(${bg})` }}
+        >
+          {displayintro && <video src={vidBG} autoPlay loop muted />}
 
-      {displayintro && (
-          <video src={vidBG} autoPlay loop muted />
-      )}
-
-          
           {displayintro && (
-            
             <div className="h-[330px] top-[25%] backdrop-blur-sm bg-white/30 bg content absolute inset-0 flex flex-col justify-center items-center space-y-4">
-              
-              
-{/* <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
+              {/* <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
     <li class="mb-10 ml-6">            
         <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
             <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -212,8 +207,10 @@ async function addList(place) {
 
 </ol> */}
 
-              <h1 className="text-[60px] text-white font-bold text-stroke-black-2 ">WELCOME TO TOURMATE</h1>
-              <p className="text-white text-[30px]"></p> 
+              <h1 className="text-[60px] text-white font-bold text-stroke-black-2 ">
+                WELCOME TO TOURMATE
+              </h1>
+              <p className="text-white text-[30px]"></p>
 
               <div className="flex">
                 <input
@@ -232,16 +229,15 @@ async function addList(place) {
                 >
                   Explore
                 </button>
-                
 
-                {/* <Link to={`/updateNote/${placeName}`}> */}
-                <Link to={'/wishlist'}>
-                <button
-                  type="button"
-                  className="text-white w-[100px] h-[40px] ml-2 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                >
-                  Cancel
-                </button>
+                <Link to={`/wishList`}>
+                  <button
+                    type="button"
+                    onClick={rundev}
+                    className="text-white w-[100px] h-[40px] ml-2 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                  >
+                    Cansel
+                  </button>
                 </Link>
               </div>
               {/* <h1 className="text-white text-[15px] opacity-60">
@@ -268,11 +264,13 @@ async function addList(place) {
 
           {display && (
             <div className=" backdrop-blur-sm bg-white/30 bg content absolute inset-0 flex flex-col justify-center items-center space-y-4">
-              <h1 className="text-[70px] uppercase font-bold text-white">{location}</h1>
-              <div className="max-h-[600px] overflow-y-auto">    
+              <h1 className="text-[70px] uppercase font-bold text-white">
+                {location}
+              </h1>
+              <div className="max-h-[600px] overflow-y-auto">
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {recommendations.results ? (
-                      recommendations.results.map((place, index) => (
+                    recommendations.results.map((place, index) => (
                       <div
                         key={index}
                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col"
@@ -282,7 +280,7 @@ async function addList(place) {
                             <img
                               className="h-64 w-full rounded-t-lg bg-auto bg-center"
                               src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=AIzaSyACdwaw1h6cATe6laoMWoayEniMemjgVkE`}
-                             // src={'https://lh3.googleusercontent.com/places/ANJU3DuzZi-_27Ng216qFCWfZI9xvnKJfrBRWvVXlF57u-myMIj-Y-R-G619mC8TAWbFTDZOD1u4BTKr4RddF92HHkXRZCpBHqdLOXs=s1600-w400'}
+                              // src={'https://lh3.googleusercontent.com/places/ANJU3DuzZi-_27Ng216qFCWfZI9xvnKJfrBRWvVXlF57u-myMIj-Y-R-G619mC8TAWbFTDZOD1u4BTKr4RddF92HHkXRZCpBHqdLOXs=s1600-w400'}
                               alt=""
                             />
                           ) : null}
@@ -290,68 +288,67 @@ async function addList(place) {
                         <div class="p-5">
                           <a href="#">
                             {place.photos ? (
-                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                 {place.name}
-                               </h5>
-                            ):null}
+                              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {place.name}
+                              </h5>
+                            ) : null}
                           </a>
 
                           {place.photos ? (
-                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                          {place.vicinity}
-                          </p>
-                          ):null}
-                         
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                              {place.vicinity}
+                            </p>
+                          ) : null}
                         </div>
                         <div class="flex-grow"></div>{" "}
                         {/* Pushes "Read more" to the bottom */}
                         {place.photos ? (
-                        <div class="p-5">
-                          <div class="flex items-center mt-2.5 mb-5">
-                            {[...Array(5)].map((_, starIndex) => (
+                          <div class="p-5">
+                            <div class="flex items-center mt-2.5 mb-5">
+                              {[...Array(5)].map((_, starIndex) => (
+                                <svg
+                                  key={starIndex}
+                                  class={`w-4 h-4 ${
+                                    starIndex < Math.round(place.rating)
+                                      ? "text-yellow-300"
+                                      : "text-gray-200 dark:text-gray-600"
+                                  }`}
+                                  aria-hidden="true"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="currentColor"
+                                  viewBox="0 0 22 20"
+                                >
+                                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                              ))}
+                              <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                                {place.rating}
+                              </span>
+                            </div>
+                            <button
+                              onClick={() => addList(place)}
+                              href="#"
+                              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                              Add to list
                               <svg
-                                key={starIndex}
-                                class={`w-4 h-4 ${
-                                  starIndex < Math.round(place.rating)
-                                    ? "text-yellow-300"
-                                    : "text-gray-200 dark:text-gray-600"
-                                }`}
+                                class="w-3.5 h-3.5 ml-2"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 22 20"
+                                fill="none"
+                                viewBox="0 0 14 10"
                               >
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                <path
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M1 5h12m0 0L9 1m4 4L9 9"
+                                />
                               </svg>
-                            ))}
-                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                              {place.rating}
-                            </span>
+                            </button>
                           </div>
-                          <button
-                           onClick={() => addList(place)}
-                            href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                          >
-                            Add to list
-                            <svg
-                              class="w-3.5 h-3.5 ml-2"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 14 10"
-                            >
-                              <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9"
-                              />
-                            </svg>
-                          </button>                          
-                        </div>
-                         ) : null}
+                        ) : null}
                       </div>
                     ))
                   ) : (

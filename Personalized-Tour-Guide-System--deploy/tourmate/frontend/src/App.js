@@ -27,9 +27,9 @@ import Experience from "./component/Experience";
 import CreateExperience from "./component/CreateExperience";
 import UpdateExperience from "./component/UpdateExperience";
 
-import SearchPlaces from "./component/SearchPlaces";
-import WishList from "./component/WishList";
-import UpdateNote from "./component/UpdateNote";
+import SearchPlaces from "./component/wishlistManagement/SearchPlaces";
+import WishList from "./component/wishlistManagement/WishList";
+import UpdateNote from "./component/wishlistManagement/UpdateNote";
 import Map from "./component/placesManagement/Map";
 const ROLES = {
   User: 2001
